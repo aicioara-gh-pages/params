@@ -4,13 +4,18 @@
     <title>URL Parameters</title>
 </head>
 <body>
-
-<div id="container"></div>
-
+<pre><code id="result"></code></pre>
 <script>
-var container = document.querySelector("#container")
-container.innerHTML = "Foo";
+var container = document.querySelector("#result")
+var search = window.location.search.substr(1)
+var params = {}
+search.split('&').forEach(d => {
+    var key = d.split('=')[0]
+    var value = decodeURIComponent(d.split('=')[1])
+    value = value.replace(/\/*$/, '')
+    params[key] = value
+})
+result.innerHTML = JSON.stringify(params, null, 4)
 </script>
-
 </body>
 </html>
